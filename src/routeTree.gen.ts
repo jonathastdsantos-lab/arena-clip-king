@@ -10,11 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthSignupRouteImport } from './routes/auth/signup'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AppPublishRouteImport } from './routes/_app/publish'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppVideosIndexRouteImport } from './routes/_app/videos/index'
+import { Route as AppClipsIndexRouteImport } from './routes/_app/clips/index'
+import { Route as AppVideosUploadRouteImport } from './routes/_app/videos/upload'
+import { Route as AppVideosVideoIdIndexRouteImport } from './routes/_app/videos/$videoId/index'
+import { Route as AppClipsClipIdIndexRouteImport } from './routes/_app/clips/$clipId/index'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,31 +36,142 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/auth/signup',
+  path: '/auth/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppPublishRoute = AppPublishRouteImport.update({
+  id: '/publish',
+  path: '/publish',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVideosIndexRoute = AppVideosIndexRouteImport.update({
+  id: '/videos/',
+  path: '/videos/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClipsIndexRoute = AppClipsIndexRouteImport.update({
+  id: '/clips/',
+  path: '/clips/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVideosUploadRoute = AppVideosUploadRouteImport.update({
+  id: '/videos/upload',
+  path: '/videos/upload',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVideosVideoIdIndexRoute = AppVideosVideoIdIndexRouteImport.update({
+  id: '/videos/$videoId/',
+  path: '/videos/$videoId/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClipsClipIdIndexRoute = AppClipsClipIdIndexRouteImport.update({
+  id: '/clips/$clipId/',
+  path: '/clips/$clipId/',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/publish': typeof AppPublishRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/videos/upload': typeof AppVideosUploadRoute
+  '/clips/': typeof AppClipsIndexRoute
+  '/videos/': typeof AppVideosIndexRoute
+  '/clips/$clipId/': typeof AppClipsClipIdIndexRoute
+  '/videos/$videoId/': typeof AppVideosVideoIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/publish': typeof AppPublishRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/videos/upload': typeof AppVideosUploadRoute
+  '/clips': typeof AppClipsIndexRoute
+  '/videos': typeof AppVideosIndexRoute
+  '/clips/$clipId': typeof AppClipsClipIdIndexRoute
+  '/videos/$videoId': typeof AppVideosVideoIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/publish': typeof AppPublishRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/_app/videos/upload': typeof AppVideosUploadRoute
+  '/_app/clips/': typeof AppClipsIndexRoute
+  '/_app/videos/': typeof AppVideosIndexRoute
+  '/_app/clips/$clipId/': typeof AppClipsClipIdIndexRoute
+  '/_app/videos/$videoId/': typeof AppVideosVideoIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/sitemap.xml'
+    | '/dashboard'
+    | '/publish'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/videos/upload'
+    | '/clips/'
+    | '/videos/'
+    | '/clips/$clipId/'
+    | '/videos/$videoId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml'
-  id: '__root__' | '/' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/sitemap.xml'
+    | '/dashboard'
+    | '/publish'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/videos/upload'
+    | '/clips'
+    | '/videos'
+    | '/clips/$clipId'
+    | '/videos/$videoId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/sitemap.xml'
+    | '/_app/dashboard'
+    | '/_app/publish'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/_app/videos/upload'
+    | '/_app/clips/'
+    | '/_app/videos/'
+    | '/_app/clips/$clipId/'
+    | '/_app/videos/$videoId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthSignupRoute: typeof AuthSignupRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,13 +197,111 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/signup': {
+      id: '/auth/signup'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/publish': {
+      id: '/_app/publish'
+      path: '/publish'
+      fullPath: '/publish'
+      preLoaderRoute: typeof AppPublishRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/videos/': {
+      id: '/_app/videos/'
+      path: '/videos'
+      fullPath: '/videos/'
+      preLoaderRoute: typeof AppVideosIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/clips/': {
+      id: '/_app/clips/'
+      path: '/clips'
+      fullPath: '/clips/'
+      preLoaderRoute: typeof AppClipsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/videos/upload': {
+      id: '/_app/videos/upload'
+      path: '/videos/upload'
+      fullPath: '/videos/upload'
+      preLoaderRoute: typeof AppVideosUploadRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/videos/$videoId/': {
+      id: '/_app/videos/$videoId/'
+      path: '/videos/$videoId'
+      fullPath: '/videos/$videoId/'
+      preLoaderRoute: typeof AppVideosVideoIdIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/clips/$clipId/': {
+      id: '/_app/clips/$clipId/'
+      path: '/clips/$clipId'
+      fullPath: '/clips/$clipId/'
+      preLoaderRoute: typeof AppClipsClipIdIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppPublishRoute: typeof AppPublishRoute
+  AppVideosUploadRoute: typeof AppVideosUploadRoute
+  AppClipsIndexRoute: typeof AppClipsIndexRoute
+  AppVideosIndexRoute: typeof AppVideosIndexRoute
+  AppClipsClipIdIndexRoute: typeof AppClipsClipIdIndexRoute
+  AppVideosVideoIdIndexRoute: typeof AppVideosVideoIdIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppDashboardRoute: AppDashboardRoute,
+  AppPublishRoute: AppPublishRoute,
+  AppVideosUploadRoute: AppVideosUploadRoute,
+  AppClipsIndexRoute: AppClipsIndexRoute,
+  AppVideosIndexRoute: AppVideosIndexRoute,
+  AppClipsClipIdIndexRoute: AppClipsClipIdIndexRoute,
+  AppVideosVideoIdIndexRoute: AppVideosVideoIdIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthSignupRoute: AuthSignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

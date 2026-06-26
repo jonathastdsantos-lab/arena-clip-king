@@ -1,22 +1,32 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { LandingPage } from "@/components/LandingPage";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { supabase, isMockMode } from "@/lib/supabase";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/")(({
+  beforeLoad: async () => {
+    if (isMockMode) {
+      // In demo mode, always go to biblioteca
+      throw redirect({ to: "/biblioteca" });
+    }
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      throw redirect({ to: "/biblioteca" });
+    } else {
+      throw redirect({ to: "/auth/login" });
+    }
+  },
   head: () => ({
     meta: [
-      { title: "ArenaClips — Edite seus melhores momentos de jogo" },
+      { title: "ArenaClips — Os melhores momentos. Em um clique." },
       {
         name: "description",
         content:
-          "ArenaClips é o editor de clipes para gamers: corte, legende e exporte highlights prontos para postar em segundos.",
-      },
-      { property: "og:title", content: "ArenaClips — Edite seus melhores momentos de jogo" },
-      {
-        property: "og:description",
-        content:
-          "Corte, legende e exporte highlights prontos para postar em segundos. O editor de clipes feito para gamers.",
+          "Plataforma de geração automática de cortes virais para conteúdo esportivo brasileiro. Análise de copyright integrada.",
       },
     ],
   }),
-  component: LandingPage,
-});
+  component: () => null,
+}));

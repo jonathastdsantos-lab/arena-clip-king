@@ -5,8 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * ArenaClips design system — neon mint on deep navy, esports energy.
- * Display: Bebas Neue. Body: Barlow. All colors in oklch.
+ * ArenaClips design system — lime neon on deep black, sports/streaming energy.
+ * Display: Anton. Body: Archivo. Mono: JetBrains Mono.
+ * All accent colors anchored to #C2FF45 (lime neon).
  */
 
 @theme inline {
@@ -40,77 +41,97 @@
   --color-ring-offset-background: var(--background);
 
   --color-surface: var(--surface);
-  --color-mint: var(--mint);
-  --color-mint-bright: var(--mint-bright);
+  --color-sidebar: var(--sidebar);
+  --color-lime: var(--lime);
 
-  --font-display: "Bebas Neue", sans-serif;
-  --font-sans: "Barlow", sans-serif;
+  --font-display: "Anton", sans-serif;
+  --font-sans: "Archivo", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
 :root {
   --radius: 0.75rem;
 
-  --background: oklch(0.21 0.04 233);
-  --foreground: oklch(0.97 0.01 180);
+  /* Backgrounds */
+  --background: #0C0F0D;
+  --sidebar: #080A09;
+  --surface: #141714;
+  --card: #161A16;
 
-  --surface: oklch(0.26 0.045 220);
-  --card: oklch(0.27 0.05 215);
-  --card-foreground: oklch(0.97 0.01 180);
+  /* Foreground */
+  --foreground: #F0F5F0;
+  --card-foreground: #F0F5F0;
+  --popover: #141714;
+  --popover-foreground: #F0F5F0;
 
-  --popover: oklch(0.24 0.045 225);
-  --popover-foreground: oklch(0.97 0.01 180);
+  /* Primary — lime neon */
+  --primary: #C2FF45;
+  --primary-foreground: #0C0F0D;
+  --lime: #C2FF45;
 
-  --primary: oklch(0.8 0.14 172);
-  --primary-foreground: oklch(0.18 0.05 200);
+  /* Secondary */
+  --secondary: #1E251E;
+  --secondary-foreground: #C2FF45;
 
-  --secondary: oklch(0.34 0.07 165);
-  --secondary-foreground: oklch(0.97 0.01 180);
+  /* Muted */
+  --muted: #1A1E1A;
+  --muted-foreground: #6B7A6B;
 
-  --muted: oklch(0.3 0.04 220);
-  --muted-foreground: oklch(0.72 0.03 190);
+  /* Accent — slightly warmer lime */
+  --accent: #D4FF6B;
+  --accent-foreground: #0C0F0D;
 
-  --accent: oklch(0.9 0.16 158);
-  --accent-foreground: oklch(0.18 0.05 200);
+  /* Destructive — warm red */
+  --destructive: #FF7A6B;
+  --destructive-foreground: #0C0F0D;
 
-  --destructive: oklch(0.62 0.22 25);
-  --destructive-foreground: oklch(0.97 0.01 180);
+  /* Status colors */
+  --status-processing: #FFD43B;
+  --status-done: #6FE08A;
+  --status-error: #FF7A6B;
 
-  --border: oklch(0.4 0.06 195 / 30%);
-  --input: oklch(0.4 0.06 195 / 25%);
-  --ring: oklch(0.8 0.14 172);
+  /* Risk level colors */
+  --risk-ok: #6FE08A;
+  --risk-medium: #FFD43B;
+  --risk-high: #FF7A6B;
 
-  --mint: oklch(0.8 0.14 172);
-  --mint-bright: oklch(0.9 0.16 158);
+  /* Borders / inputs */
+  --border: rgba(194, 255, 69, 0.10);
+  --input: rgba(194, 255, 69, 0.08);
+  --ring: #C2FF45;
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.8 0.14 172), oklch(0.9 0.16 158));
-  --gradient-surface: linear-gradient(160deg, oklch(0.27 0.05 215), oklch(0.22 0.04 230));
-  --shadow-glow: 0 0 40px -8px oklch(0.85 0.15 165 / 45%);
-  --shadow-card: 0 24px 60px -28px oklch(0.05 0.02 230 / 80%);
+  /* Shadows */
+  --shadow-glow: 0 0 40px -8px rgba(194, 255, 69, 0.35);
+  --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.6);
+  --shadow-glow-sm: 0 0 20px -6px rgba(194, 255, 69, 0.25);
+
+  /* Gradients */
+  --gradient-lime: linear-gradient(135deg, #C2FF45, #D4FF6B);
+  --gradient-surface: linear-gradient(160deg, #161A16, #0C0F0D);
 }
 
 .dark {
-  --background: oklch(0.21 0.04 233);
-  --foreground: oklch(0.97 0.01 180);
-  --surface: oklch(0.26 0.045 220);
-  --card: oklch(0.27 0.05 215);
-  --card-foreground: oklch(0.97 0.01 180);
-  --popover: oklch(0.24 0.045 225);
-  --popover-foreground: oklch(0.97 0.01 180);
-  --primary: oklch(0.8 0.14 172);
-  --primary-foreground: oklch(0.18 0.05 200);
-  --secondary: oklch(0.34 0.07 165);
-  --secondary-foreground: oklch(0.97 0.01 180);
-  --muted: oklch(0.3 0.04 220);
-  --muted-foreground: oklch(0.72 0.03 190);
-  --accent: oklch(0.9 0.16 158);
-  --accent-foreground: oklch(0.18 0.05 200);
-  --destructive: oklch(0.62 0.22 25);
-  --destructive-foreground: oklch(0.97 0.01 180);
-  --border: oklch(0.4 0.06 195 / 30%);
-  --input: oklch(0.4 0.06 195 / 25%);
-  --ring: oklch(0.8 0.14 172);
-  --mint: oklch(0.8 0.14 172);
-  --mint-bright: oklch(0.9 0.16 158);
+  --background: #0C0F0D;
+  --sidebar: #080A09;
+  --surface: #141714;
+  --card: #161A16;
+  --foreground: #F0F5F0;
+  --card-foreground: #F0F5F0;
+  --popover: #141714;
+  --popover-foreground: #F0F5F0;
+  --primary: #C2FF45;
+  --primary-foreground: #0C0F0D;
+  --secondary: #1E251E;
+  --secondary-foreground: #C2FF45;
+  --muted: #1A1E1A;
+  --muted-foreground: #6B7A6B;
+  --accent: #D4FF6B;
+  --accent-foreground: #0C0F0D;
+  --destructive: #FF7A6B;
+  --destructive-foreground: #0C0F0D;
+  --border: rgba(194, 255, 69, 0.10);
+  --input: rgba(194, 255, 69, 0.08);
+  --ring: #C2FF45;
 }
 
 @layer base {
@@ -119,25 +140,32 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
     font-weight: 400;
+    line-height: 1;
+  }
+
+  code, pre, .mono {
+    font-family: var(--font-mono);
   }
 }
 
+/* ─── Utility classes ─── */
+
 @utility text-glow {
-  text-shadow: 0 0 24px oklch(0.85 0.15 165 / 55%);
+  text-shadow: 0 0 20px rgba(194, 255, 69, 0.6);
 }
 
-@utility bg-gradient-hero {
-  background-image: var(--gradient-hero);
+@utility bg-gradient-lime {
+  background-image: var(--gradient-lime);
 }
 
 @utility bg-gradient-surface {
@@ -148,13 +176,25 @@
   box-shadow: var(--shadow-glow);
 }
 
+@utility shadow-glow-sm {
+  box-shadow: var(--shadow-glow-sm);
+}
+
 @utility shadow-card {
   box-shadow: var(--shadow-card);
 }
 
 @utility grid-noise {
   background-image:
-    linear-gradient(oklch(0.4 0.06 195 / 8%) 1px, transparent 1px),
-    linear-gradient(90deg, oklch(0.4 0.06 195 / 8%) 1px, transparent 1px);
-  background-size: 44px 44px;
+    linear-gradient(rgba(194, 255, 69, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(194, 255, 69, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Score bar animation */
+@utility score-bar {
+  height: 4px;
+  border-radius: 9999px;
+  background-color: var(--surface);
+  overflow: hidden;
 }
